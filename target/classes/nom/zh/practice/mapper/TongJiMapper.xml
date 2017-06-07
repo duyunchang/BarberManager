@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--suppress ALL -->
+<mapper namespace="nom.zh.practice.mapper.TongJiMapper">
+
+    <!-- 生日统计 -->
+    <select id="queryBir" resultType="java.util.Map">
+        SELECT
+            DATE_FORMAT(BIRTHDAY, '%m') DT,
+            COUNT(*)                    SUM
+        FROM
+            users
+        GROUP BY
+            DATE_FORMAT(BIRTHDAY, '%m')
+    </select>
+    <!-- 性别统计 -->
+    <select id="querySex" resultType="java.util.Map">
+        SELECT
+            CASE
+            WHEN SEX = 1
+                THEN
+                    "男"
+            WHEN SEX = 2
+                THEN
+                    "女"
+            END         name,
+            COUNT(*) AS value
+        FROM
+            users
+        GROUP BY
+            SEX
+    </select>
+</mapper>

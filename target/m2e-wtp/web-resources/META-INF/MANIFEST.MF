@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Title: BarberManager
+Implementation-Version: 1.0
+Built-By: PC
+Implementation-Vendor-Id: org.com
+Build-Jdk: 1.8.0_102
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+

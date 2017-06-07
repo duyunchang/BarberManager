@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="css/globel.css"/>
+    <title>用户管理</title>
+</head>
+<body>
+
+
+<form class="navbar-form navbar-left" role="search">
+    <div class="form-group">
+        <label for="queryNm">姓名</label>
+        <input id="queryNm" type="text" class="form-control" placeholder="姓名">
+    </div>
+    <div class="form-group">
+        <div class="form-group">
+            <label for="querySex">性别</label>
+            <select class="form-control" id="querySex">
+                <option value="">请选择</option>
+                <option value="1">男</option>
+                <option value="2">女</option>
+            </select>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="queryType">用户类型</label>
+        <select class="form-control" id="queryType">
+            <option value="">请选择</option>
+            <option value="1">管理员</option>
+            <option value="2">普通用户</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <div class="form-group">
+            <label for="queryDel">有效性</label>
+            <select class="form-control" id="queryDel">
+                <option value="">请选择</option>
+                <option value="1">有效</option>
+                <option value="2">无效</option>
+            </select>
+        </div>
+    </div>
+    <button id="sub" type="button" class="btn btn-default">搜索</button>
+    <button type="button" class="btn btn-primary" id="tianjiaButton">添加</button>
+</form>
+
+<div id="medTable"></div>
+
+<div id="fenYe"></div>
+
+
+<!-- 修改 -->
+<div style="top: 20%" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">管理</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" value="" id="getUid">
+                <table class="table">
+                    <tr>
+                        <td>账号</td>
+                        <td><span id="getLnm"></span></td>
+                    </tr>
+
+                    <tr>
+                        <td>用户类型</td>
+                        <td>
+                            <select class="form-control" id="getType">
+                                <option value="">请选择</option>
+                                <option value="1">管理员</option>
+                                <option value="2">普通用户</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>有效性</td>
+                        <td>
+                            <select class="form-control" id="getDel">
+                                <option value="">请选择</option>
+                                <option value="1">有效</option>
+                                <option value="2">无效</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button id="subChange" type="button" class="btn btn-primary">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 添加 -->
+<div style="top: 20%" class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="addUserLabel">添加用户</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tr>
+                        <td>账号</td>
+                        <td><input id="addLnm"></td>
+                        <td>密码</td>
+                        <td><input id="addPas"></td>
+                    </tr>
+                    <tr>
+                        <td>姓名</td>
+                        <td><input id="addNm"></td>
+                        <td>生日</td>
+                        <td><input id="addBir" value=""></td>
+
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td>性别</td>
+                        <td>
+                            <select class="form-control" id="addSex">
+                                <option value="">请选择</option>
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>用户类型</td>
+                        <td>
+                        <select class="form-control" id="addType">
+                            <option value="">请选择</option>
+                            <option value="1">管理员</option>
+                            <option value="2">普通用户</option>
+                        </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>有效性</td>
+                        <td>
+                            <select class="form-control" id="addDel">
+                                <option value="">请选择</option>
+                                <option value="1">有效</option>
+                                <option value="2">无效</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button id="addUser" type="button" class="btn btn-primary">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--重置密码-->
+<div style="top: 20%" class="modal fade bs-example-modal-sm" id="rePasModal" tabindex="-1" role="dialog" aria-labelledby="rePasModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="rePasModalLabel">提示</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" value="" id="rePasUid">
+                确定要重置密码为：1吗？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="rePas">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 权限修改 -->
+<div style="top: 20%" class="modal fade" id="popModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="popModalLabel">权限设置</h4>
+            </div>
+            <div class="modal-body">
+                    用户：<span id="showpopUserNm"></span><br>
+                    <input type="hidden" value="" id="popUid">
+
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name='chkId' id="gl" value="1"> 人员管理
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name='chkId' id="tj" value="2"> 人员统计
+                    </label><br>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name='chkId' id="mysys" value="6"> 我的日志
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name='chkId' id="sysrz" value="3"> 系统日志
+                    </label>
+                    <br>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name='chkId' id="tx" value="4"> 生日提醒
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name='chkId' id="gg" value="5"> 公告
+                    </label>
+
+            </div>
+            <div class="modal-footer">
+                <button id="popChange" type="button" class="btn btn-primary">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="js/userManager.js"></script>
+</body>
+</html>

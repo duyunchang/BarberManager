@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--suppress ALL -->
+<mapper namespace="nom.zh.practice.mapper.LogMapper">
+    <!-- 添加日志 -->
+    <insert id="addLog">
+        insert into LOG
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            ID,
+            UID,
+            `TYPE`,
+            NR,
+            DT,
+            IP,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{id},
+            #{uid},
+            #{type},
+            #{nr},
+            DATE_FORMAT(#{dt},'%Y-%m-%d %T'),
+            #{ip},
+        </trim>
+    </insert>
+
+
+    <!-- 日志查询 -->
+    <sql id="queryLog">
+        <if test="type != null and type != ''">
+            AND sl.`TYPE` = #{type}
+        </if>
+        <if test="nm != null and nm != ''">
+            AND su.NM like CONCAT('%', #{nm}, '%')
+        </if>
+        <if test="dt!=null and dt!=''">
+            and DT LIKE CONCAT(#{dt}, '%')
+        </if>
+        <if test="uid != null and uid != ''">
+            AND sl.UID = #{uid}
+        </if>
+    </sql>
+
+    <!-- 分页查询 -->
+    <select id="selectPage" resultType="java.util.Map">
+        SELECT
+        sl.ID,
+        su.NM,
+        sl.`TYPE`,
+        DATE_FORMAT(DT,'%Y-%m-%d %T') DT,
+        NR,
+        IP
+        FROM
+        LOG sl
+        LEFT JOIN USERS su ON sl.UID = su.UID
+        WHERE 1 = 1
+        <include refid="queryLog"/>
+        ORDER BY DT DESC
+    </select>
+
+
+    <!-- 通过id查询单个日志 -->
+    <select id="selectLogById" resultType="java.util.Map">
+        SELECT
+            sl.ID,
+            su.NM,
+            sl.`TYPE`,
+            DATE_FORMAT(DT, '%Y-%m-%d %T') DT,
+            NR,
+            IP
+        FROM
+            LOG sl
+            LEFT JOIN USERS su ON sl.UID = su.UID
+        WHERE
+            ID = #{id}
+    </select>
+
+
+    <!-- 查询类型 -->
+    <select id="selectLx" resultType="java.util.Map">
+        SELECT
+        `TYPE`
+        FROM
+        LOG
+        <where>
+            <if test="uid != null and uid != ''">
+                UID = #{uid}
+            </if>
+        </where>
+        GROUP BY `TYPE`
+    </select>
+
+</mapper>

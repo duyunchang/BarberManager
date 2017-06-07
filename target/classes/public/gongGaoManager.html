@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="css/globel.css"/>
+    <title>公告</title>
+</head>
+<body>
+
+
+<form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+            <label for="queryFnm">发送人</label>
+            <input type="text" class="form-control" id="queryFnm">
+        </div>
+        <div class="form-group">
+            <label for="queryBt">标题</label>
+            <input type="text" class="form-control" id="queryBt">
+        </div>
+        <div class="form-group">
+            <label for="queryDt">发布时间</label>
+            <input type="text" class="form-control" id="queryDt">
+        </div>
+
+        <button type="button"  class="btn btn-default" id="query">搜索</button>
+
+        <div class="form-group">
+            <div id="getFabu"></div>
+        </div>
+</form>
+
+<div id="medTable"></div>
+
+<div id="fenYe"></div>
+
+
+<!-- 查看 -->
+<div style="top: 20%" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">查看公告</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="getBt" class="control-label">标题:</label>
+                        <input type="text" class="form-control" id="getBt" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="getNr" class="control-label">内容:</label>
+                        <textarea class="form-control" id="getNr" readonly></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 发布公告 -->
+<div style="top: 20%" class="modal fade" id="fabuModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">发布公告</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="addBt" class="control-label">标题:</label>
+                        <input type="text" class="form-control" id="addBt">
+                    </div>
+                    <div class="form-group">
+                        <label for="addNr" class="control-label">内容:</label>
+                        <textarea class="form-control" id="addNr"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="fabu">发布</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--删除-->
+<div style="top: 20%" class="modal fade bs-example-modal-sm" id="delModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="delModalLabel">提示</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" value="" id="delNid">
+                确定要删除吗？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="del">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+        </div>
+</div>
+
+
+<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="js/defaults-zh_CN.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="js/gongGaoManager.js"></script>
+<script>
+
+    //弹出发布框
+    function fabuModal() {
+        $('#fabuModal').modal();
+    }
+</script>
+</body>
+</html>

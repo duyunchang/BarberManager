@@ -1,0 +1,8 @@
+td:nth-child(1) {
+    font-family: monospace;
+}
+
+.popover{
+    max-width:2000px;
+}
+
