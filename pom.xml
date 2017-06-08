@@ -102,7 +102,7 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
-                <version>1.2.16</version> 
+                <version>1.2.31</version> 
             </dependency>
 
             <dependency>
@@ -170,12 +170,11 @@
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
 		 </dependency>
-		 <!-- Spring Boot JPA 
+		 <!-- Spring Boot JPA -->
 		 <dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-data-jpa</artifactId>
-		 </dependency> 
-		 -->	
+		 </dependency> 	
 		 <dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
@@ -195,27 +194,6 @@
 		    <version>4.5.3</version>
 		</dependency>
 		 -->
-		  <!--mybatis-->
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>1.2.0</version>
-        </dependency>
-        <!--mapper-->
-        <dependency>
-            <groupId>tk.mybatis</groupId>
-            <artifactId>mapper-spring-boot-starter</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        <!--pagehelper-->
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper-spring-boot-starter</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        
-        
-        
 		<dependency>
 		    <groupId>commons-httpclient</groupId>
 		    <artifactId>commons-httpclient</artifactId>
@@ -300,15 +278,7 @@
 		<finalName>barber</finalName>
 
 		<plugins>
-		<!--默认 jdk版本 -->
-		<plugin>    
-            <groupId>org.apache.maven.plugins</groupId>    
-            <artifactId>maven-compiler-plugin</artifactId>    
-            <configuration>    
-                <source>1.8</source>    
-                <target>1.8</target>    
-            </configuration>    
-        </plugin> 
+		
            
 		<!-- maven  跳过test单元测试-->
 		<plugin>
@@ -318,6 +288,25 @@
 				<skip>true</skip>
 			</configuration>
 		</plugin>
+		
+			<!-- webapp/WEB-INF/lib 打包 -->
+		<plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+          <encoding>UTF-8</encoding>
+               <compilerArguments>
+                  <!-- <extdirs>${basedir}/webapp/WEB-INF/lib</extdirs> -->
+                   <extdirs>${basedir}/src/main/webapp/lib</extdirs>
+               </compilerArguments>
+        </configuration>
+       </plugin>
+       
+       
+       
+		
+		
 		
 		 <!-- maven打包的时候告诉maven不需要web.xml,否刚会报找不到web.xml错误 -->
             <plugin>
